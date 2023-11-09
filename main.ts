@@ -1,5 +1,5 @@
 input.onButtonPressed(Button.AB, function () {
-    if (normal_1) {
+    if (health < 3) {
         led.stopAnimation()
         for (let index = 0; index < 3; index++) {
             music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
@@ -11,9 +11,9 @@ input.onButtonPressed(Button.AB, function () {
         music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
         music.play(music.stringPlayable("G B A G C5 B A B ", 220), music.PlaybackMode.UntilDone)
     }
-    if (normal_2) {
+    if (health < 3) {
         led.stopAnimation()
-        for (let index = 0; index < 4; index++) {
+        for (let index = 0; index < 3; index++) {
             music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
             feeding_1.showImage(0)
             feeding_2.showImage(0)
@@ -23,9 +23,9 @@ input.onButtonPressed(Button.AB, function () {
         music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
         music.play(music.stringPlayable("G B A G C5 B A B ", 220), music.PlaybackMode.UntilDone)
     }
-    if (Teen) {
+    if (health > 3) {
         led.stopAnimation()
-        for (let index = 0; index < 4; index++) {
+        for (let index = 0; index < 3; index++) {
             music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
             tfeed1.showImage(0)
             tfeed2.showImage(0)
@@ -35,13 +35,37 @@ input.onButtonPressed(Button.AB, function () {
         music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
         music.play(music.stringPlayable("G B A G C5 B A B ", 220), music.PlaybackMode.UntilDone)
     }
-    if (teen2) {
+    if (health > 3) {
         led.stopAnimation()
-        for (let index = 0; index < 4; index++) {
+        for (let index = 0; index < 3; index++) {
             music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
             tfeed1.showImage(0)
             tfeed2.showImage(0)
             teen_happy.showImage(0)
+        }
+        health += 1
+        music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
+        music.play(music.stringPlayable("G B A G C5 B A B ", 220), music.PlaybackMode.UntilDone)
+    }
+    if (health > 6) {
+        led.stopAnimation()
+        for (let index = 0; index < 3; index++) {
+            music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            af1.showImage(0)
+            af2.showImage(0)
+            adulthappy.showImage(0)
+        }
+        health += 1
+        music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
+        music.play(music.stringPlayable("G B A G C5 B A B ", 220), music.PlaybackMode.UntilDone)
+    }
+    if (health > 6) {
+        led.stopAnimation()
+        for (let index = 0; index < 3; index++) {
+            music.play(music.createSoundExpression(WaveShape.Sine, 880, 620, 255, 255, 5000, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            af1.showImage(0)
+            af2.showImage(0)
+            adulthappy.showImage(0)
         }
         health += 1
         music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
@@ -52,26 +76,25 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     music.play(music.stringPlayable("A E D F E G B C5 ", 151), music.PlaybackMode.InBackground)
     basic.showString("HEALTH IS" + health)
 })
+let af2: Image = null
+let af1: Image = null
+let adulthappy: Image = null
 let tfeed2: Image = null
 let tfeed1: Image = null
 let teen_happy: Image = null
-let teen2: Image = null
-let Teen: Image = null
 let feeding_2: Image = null
 let feeding_1: Image = null
 let Happy: Image = null
-let normal_2: Image = null
-let normal_1: Image = null
 let health = 0
 health = 1
-normal_1 = images.createImage(`
+let normal_1 = images.createImage(`
     . . . . .
     . # . # .
     . . # . .
     . # # # .
     . . . . .
     `)
-normal_2 = images.createImage(`
+let normal_2 = images.createImage(`
     . . . . .
     . . . . .
     . # . # .
@@ -99,14 +122,14 @@ feeding_2 = images.createImage(`
     . # # # .
     . . . . .
     `)
-Teen = images.createImage(`
+let Teen = images.createImage(`
     . # . # .
     . . . . .
     . . # . .
     . # # # .
     . . . . .
     `)
-teen2 = images.createImage(`
+let teen2 = images.createImage(`
     . . . . .
     . # . # .
     . . . . .
@@ -144,25 +167,25 @@ let adult = images.createImage(`
 let adult2 = images.createImage(`
     . . . . .
     # # . # #
-    . . # . .
+    # # # # #
     . . # . .
     . # # # .
     `)
-let adulthappy = images.createImage(`
+adulthappy = images.createImage(`
     # # . # #
     # # . # #
     . . # . .
     # . # . #
     . # # # .
     `)
-let af1 = images.createImage(`
+af1 = images.createImage(`
     # # . # #
     # # . # #
     . . # . .
     . # . # .
     . # # # .
     `)
-let af2 = images.createImage(`
+af2 = images.createImage(`
     . . . . .
     # # . # #
     . . # . .
